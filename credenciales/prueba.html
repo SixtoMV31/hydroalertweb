@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HydroAlert</title>
+        <style>
+            body {
+                background-color: #2e2a2a;
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 40px auto;
+            }
+            #valorActual {
+                font-size: 3em;
+                font-weight: bold;
+                text-align: center;
+            }
+            #valorActual span {
+                font-size: 0.4em;
+                color: gray;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th,
+            td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background: #f0f0f0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Nivel del tanque</h1>
+
+        <div id="valorActual">-- <span>cm</span></div>
+        <p id="ultimaActualizacion" style="text-align: center; color: gray"></p>
+
+        <h2>Historial</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dispositivo</th>
+                    <th>Nivel (cm)</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="tablaHistorial">
+                <!-- se llena con JS -->
+            </tbody>
+        </table>
+
+        <script>
+            const API_URL = "http://127.0.0.1:80/api/readings";
+
+            async function cargarDashboard() {
+                try {
+                    const respuesta = await fetch(API_URL);
+                    const lecturas = await respuesta.json();
+
+                    if (lecturas.length === 0) return; // sin datos aún
+
+                    actualizarValorActual(lecturas[0]);
+                    actualizarTabla(lecturas);
+                } catch (error) {
+                    console.error("Error al cargar datos:", error);
+                }
+            }
+
+            function actualizarValorActual(ultimaLectura) {
+                document.getElementById("valorActual").innerHTML =
+                    `${ultimaLectura.nivel} <span>cm</span>`;
+
+                const fecha = new Date(ultimaLectura.created_at);
+                document.getElementById("ultimaActualizacion").textContent =
+                    `Última actualización: ${fecha.toLocaleString()}`;
+            }
+
+            function actualizarTabla(lecturas) {
+                const tbody = document.getElementById("tablaHistorial");
+                tbody.innerHTML = ""; // limpiamos antes de volver a llenar
+
+                lecturas.forEach((lectura) => {
+                    const fila = document.createElement("tr");
+                    const fecha = new Date(lectura.created_at).toLocaleString();
+
+                    fila.innerHTML = `
+                    <td>${lectura.device_id}</td>
+                    <td>${lectura.nivel}</td>
+                    <td>${fecha}</td>
+                `;
+                    tbody.appendChild(fila);
+                });
+            }
+
+            // Cargar al abrir la página
+            cargarDashboard();
+
+            // Refrescar cada 5 segundos (5000 ms)
+            setInterval(cargarDashboard, 5000);
+        </script>
+    </body>
+</html>
