@@ -1,7 +1,3 @@
-/* ============================================================
-   HydroAlert — Dashboard
-   Sistema de monitoreo de nivel de agua
-   ============================================================ */
 
 :root {
   --bg: #0a1520;
@@ -34,6 +30,126 @@ body {
   background-attachment: fixed;
 }
 
+/*alerta crítica*/
+.alert-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background: rgba(5, 10, 15, 0.78);
+  backdrop-filter: blur(2px);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.alert-overlay.visible {
+  display:flex;
+}
+.alert-modal {
+  background: var(--panel);
+  border: 2px solid var(--danger);
+  border-radius: 6px;
+  padding: 34px 38px;
+  max-width: 360px;
+  text-align: center;
+  animation: modal-in 0.25s ease;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.alert-modal .icon-ring{
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.alert-modal .icon-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: ring-pulse 1.6s ease-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%   { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.alert-modal .icon-ring svg { width: 30px; height: 30px; }
+
+.alert-modal h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 0 0 8px;
+}
+
+.alert-modal p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0 0 22px;
+}
+
+.alert-modal button {
+  background: none;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 10px 26px;
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.alert-modal button:hover {
+  background: var(--accent-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-modal .icon-ring::before { animation: none; }
+}
+
+.alert-banner {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  max-width: 1280px;
+  margin: 16px auto 0;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+}
+
+.alert-banner.visible {
+  display: flex;
+}
+
+.alert-banner .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: banner-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes banner-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.alert-banner strong { font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-banner .dot { animation: none; }
+}
 /* ---------- Header ---------- */
 
 .topbar {

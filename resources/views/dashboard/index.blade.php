@@ -38,6 +38,24 @@
     </div>
   </header>
 
+  <div class="alert-overlay" id="alertOverlay">
+    <div class="alert-modal" id="alertModal">
+      <div class="icon-ring" id="alertIconRing">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 id="alertModalTitle">Precaución</h2>
+      <p id="alertModalText">El nivel del río está subiendo.</p>
+      <button id="alertDismiss">Entendido</button>
+    </div>
+  </div>
+
+  <div class="alert-banner" id="alertBanner">
+    <span class="dot" id="alertDot"></span>
+    <span id="alertText"></span>
+  </div>
+
   <main class="dashboard">
 
     <section class="panel gauge-panel">
