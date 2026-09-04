@@ -335,10 +335,13 @@ Al integrar cambios de otros colaboradores, regenerar siempre `vendor/` (y `node
 
 ## Autores
 
-- _Nombre del integrante_ — desarrollo backend y firmware
-- _Nombre del integrante_ — desarrollo frontend y dashboard
+- _Sixto Mendez_ — desarrollo backend, frontend y dashboard
+- _Daniel Perez Flores_ —Asesor y colaborador del proyecto
+- _Evelin Arleth_ -Encargados de documentar
+- _Jose Alejandro_ -Encargados de documentar
 
-_Proyecto desarrollado como parte de [nombre de la materia/curso], [institución]._
+
+_Proyecto desarrollado con fines de investigacion._
 
 ---
 
