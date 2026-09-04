@@ -6,7 +6,7 @@
 // Ajusta estos valores a tu instalación real.
 const CONFIG = {
     API_URL: "/api/readings", // ruta de tu GET API (relativa, funciona en local y en Hostinger)
-    REFRESH_MS: 5000, // cada cuánto se refresca el dashboard
+    REFRESH_MS: 2000, // cada cuánto se refresca el dashboard
     MAX_NIVEL_CM: 100, // nivel máximo que muestra la escala (tope de la última zona)
     DEVICE_LAT: 17.9869, // ubicación fija del dispositivo — cámbiala por la real
     DEVICE_LNG: -92.9303,
